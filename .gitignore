@@ -1,2 +1,6 @@
 EV_Project15.zip
 *.zip
+.idea/
+node_modules/
+dist/
+build/
