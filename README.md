@@ -1,77 +1,99 @@
-#  EV Project
+<div align="center">
 
-번호판 인식 기반 전기차 충전 구역 통합 관리 시스템 프로젝트입니다.
+# ⚡ EV_Project
 
----
+> **번호판 인식 기반 전기차 충전구역 통합관리 시스템**
+> Vue.js로 구현한 실시간 충전 모니터링 & 사용자/관리자 권한 분리 대시보드
 
-##  프로젝트 소개
-전기차 충전 구역을 효율적으로 관리하기 위해  
-번호판 인식 기능을 기반으로 차량을 식별하고,  
-충전 구역 상태를 관리하는 시스템입니다.
+![Vue.js](https://img.shields.io/badge/Vue.js-3.x-4FC08D?style=for-the-badge&logo=vue.js&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7.x-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+![Axios](https://img.shields.io/badge/Axios-1.x-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
+![Chart.js](https://img.shields.io/badge/Chart.js-4.x-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=for-the-badge&logo=spring-boot&logoColor=white)
 
-사용자와 관리자 권한을 분리하여 실제 서비스 구조를 반영한 프로젝트입니다.
-
----
-
-##  사용 기술
-- Frontend: Vue.js
-- Backend: Java, Spring Boot
-- Database: (사용 DB 입력 ex. MySQL)
+</div>
 
 ---
 
-##  주요 기능
+## 🎯 What & Why
 
-###  충전 구역 관리
-- 충전 구역 상태 표시
-- 차량 정보 확인
-- 실시간 상태 UI 표현
-
-###  번호판 인식 연동
-- 차량 번호판 기반 데이터 처리
-- 차량 정보 자동 식별
-
-###  사용자 / 관리자 권한 분리
-- 사용자(User)와 관리자(Admin) 계정 구분
-- 권한에 따른 메뉴 및 기능 접근 제어
-- 관리자 전용 관리 기능 제공
-- 사용자 권한에 따른 UI 화면 분기 처리
+| | |
+|---|---|
+| **무엇을** | 전기차 충전구역의 실시간 상태를 번호판 인식으로 자동 식별하여 통합 관리하는 웹 시스템 |
+| **왜 만들었나** | 전기차 보급 확대에 따른 충전구역 관리 부재 문제 해결 + 사용자/관리자 역할 분리로 실제 서비스 구조 구현 |
+| **누구를 위해** | 충전구역 운영 관리자 & 전기차 사용자 |
 
 ---
 
 ## 🖥 실행 화면
-![관리자대시보드](./관리자%20대시보드.PNG)
-![사용자대시보드](./사용자%20대시보드.PNG)
- 
+
+| 사용자 대시보드 | 관리자 대시보드 |
+|:---:|:---:|
+| ![사용자](사용자%20대시보드.PNG) | ![관리자](관리자%20대시보드.PNG) |
 
 ---
 
-##  담당 역할 (✔ 프론트엔드)
-- Vue.js 기반 UI 화면 구현
-- 컴포넌트 구조 설계
-- API 연동을 통한 데이터 출력 처리
-- 사용자 인터페이스 및 화면 구성
-- 사용자 / 관리자 권한에 따른 UI 분기 처리
-- 상태값에 따른 동적 UI 구현
+## 🏗 Architecture
+
+EV_Project/
+├── frontend/ (Vue 3 SPA)
+│   └── src/
+│       ├── views/
+│       │   ├── Login.vue / Signup.vue           # 인증
+│       │   ├── EVUserDashboard.vue              # 사용자 대시보드
+│       │   ├── EvChargingZoneMonitoring.vue     # 충전구역 실시간 모니터링
+│       │   ├── EVVideoBoard.vue                 # 번호판 인식 CCTV
+│       │   └── EvDatabaseUsage.vue              # DB 현황/통계
+│       ├── components/ # 재사용 UI 컴포넌트
+│       └── router/     # 권한별 라우팅
+└── backend/ (Spring Boot REST API)
 
 ---
 
-##  문제 해결 경험
-- API 데이터 연동 시 비동기 처리 문제 발생  
-  → axios 및 async/await 활용하여 해결
+## 💡 Technical Highlights
 
-- UI 상태 갱신이 즉시 반영되지 않는 문제  
-  → Vue 반응형 데이터 처리 방식으로 개선
+### 1. 🔐 Role-Based UI Routing (사용자/관리자 권한 분리)
+Vue Router의 beforeEach 가드를 활용해 로그인 사용자의 역할(User/Admin)에 따라 접근 가능한 화면을 분기 처리. 관리자 전용 메뉴는 일반 사용자에게 완전 비노출.
 
----
+### 2. 📊 Chart.js 실시간 충전 현황 시각화
+Chart.js를 Vue 컴포넌트에 통합하여 충전구역 현황(사용중/대기중/고장)을 도넛 차트로 시각화. axios의 async/await 패턴으로 API 응답 후 차트 데이터 반응형 업데이트 구현.
 
-##  프로젝트를 통해 배운 점
-- Vue.js 기반 컴포넌트 구조 이해
-- API 연동을 통한 데이터 처리 경험
-- 사용자 권한에 따른 UI 설계 경험
-- 사용자 중심 인터페이스 설계 능력 향상
+### 3. ⚡ 번호판 인식 API 연동
+백엔드의 번호판 인식(OCR) 결과를 REST API로 수신, Vue 반응형 데이터(ref)에 즉시 반영하여 차량 입출차 상태를 실시간으로 UI에 업데이트.
 
 ---
 
-##  한줄 소개 (면접용)
-Vue.js를 활용해 사용자와 관리자 권한을 분리한 전기차 충전 관리 시스템의 프론트엔드를 구현한 프로젝트입니다.
+## 🛠 Tech Stack
+
+| 구분 | 기술 |
+|------|------|
+| **Frontend** | Vue 3, Vue Router 5, Vite 7 |
+| **상태관리** | Composition API (ref, reactive) |
+| **HTTP 통신** | Axios 1.x |
+| **데이터 시각화** | Chart.js 4.x |
+| **Backend** | Java, Spring Boot |
+
+---
+
+## 📊 Lessons Learned
+
+**[이슈 1] API 비동기 처리** - axios 호출 후 차트가 빈 상태로 렌더링 → async/await + nextTick() 조합으로 해결
+
+**[이슈 2] 권한별 UI 갱신** - 역할 전환 시 이전 메뉴 잔류 → 인증 상태를 watch로 메뉴 동기화 처리
+
+---
+
+## 🚀 Getting Started
+
+cd frontend && npm install && npm run dev
+
+---
+
+## 👤 My Role — 프론트엔드 전체 단독 담당
+
+- Vue 3 컴포넌트 구조 설계 및 전체 화면 구현
+- Vue Router 사용자/관리자 권한별 라우팅 처리
+- Axios API 연동 및 비동기 데이터 바인딩
+- Chart.js 기반 충전 현황 시각화
+- 반응형 UI 및 동적 화면 전환 구현
